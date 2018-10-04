@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dan.mapper.TbOrderMapper">
+
+	<resultMap type="com.dan.pojo.Order" id="order">
+		<id column="oid" property="oid" />
+		<result column="total" property="total" />
+		<result column="ordertime" property="ordertime" />
+		<result column="state" property="state" />
+		<result column="name" property="name" />
+		<result column="phone" property="phone" />
+		<result column="addr" property="addr" />
+		<association property="user" javaType="com.dan.pojo.User" >
+			<id column="uid" property="uid" />
+			<result column="username" property="username" />
+			<result column="password" property="password" />
+			<result column="name" property="name" />
+			<result column="email" property="email" />
+			<result column="phone" property="phone" />
+			<result column="addr" property="addr" />
+			<result column="state" property="state" />
+			<result column="code" property="code" />
+		</association>
+		<collection property="orderItems" ofType="com.dan.pojo.OrderItem">
+			<id property="itemid" column="itemid" />
+			<result property="count" column="count" />
+			<result property="subtotal" column="subtotal"/> 
+		</collection>
+	</resultMap>
+
+	<!-- 查询用户列表总数 用于分页查询 -->
+	<select id="findOrderCount" resultType="int">
+		select count(*) from
+		Orders
+	</select>
+
+	 <select id="findOrderDetail" resultMap="order">
+		select
+		o.*,
+		u.*,
+		oi.*
+		from
+		Orders o,
+		User u,
+		OrderItem oi
+		where oi.oid=o.oid and o.uid=u.uid
+	</select> 
+
+	<!-- <select id="findCategoryDetail" resultType="com.dan.pojo.Category">
+		select * from
+		Category
+	</select> -->
+</mapper>

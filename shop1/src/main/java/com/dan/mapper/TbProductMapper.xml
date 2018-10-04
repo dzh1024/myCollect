@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dan.mapper.TbProductMapper">
+
+	<select id="findHotProduct" resultType="com.dan.pojo.Product">
+		select * from Product where is_hot="1" limit 5
+	</select>
+
+
+
+	<!-- 查询用户列表总数 用于分页查询     很久以前 -->
+	<select id="findProductCount" resultType="int">
+		select count(*) from Product
+	</select>
+	
+	<select id="findProductDetail" resultType="com.dan.pojo.Product">
+		select * from Product
+	</select>
+	
+	<!-- 通过二级目录查询商品列表  -->
+	<select id="findProListByCsid" resultType="com.dan.pojo.Product">
+		select * from Product where csid=#{csid} limit #{page*10}
+	</select>
+</mapper>

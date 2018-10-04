@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dan.mapper.TbCategorySecondMapper">
+
+	<!-- 查询用户列表总数 用于分页查询 -->
+	<select id="findCSCount" resultType="int">
+		select count(*) from CategorySecond
+	</select>
+	
+	<select id="findCsDetail" resultType="com.dan.pojo.CategorySecond">
+		select * from CategorySecond
+	</select>
+</mapper>
